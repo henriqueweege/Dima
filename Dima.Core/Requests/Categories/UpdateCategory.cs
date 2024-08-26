@@ -5,6 +5,7 @@ namespace Dima.Core.Requests.Categories;
 
 public class UpdateCategory : BaseRequest<Category>
 {
+    public long Id { get; set; }
     [Required(ErrorMessage = "Title must be provided.")]
     [MaxLength(80, ErrorMessage = "Title must not be greater than 80 characters.")]
     public string Title { get; set; }

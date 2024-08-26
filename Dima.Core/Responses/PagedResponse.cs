@@ -12,7 +12,7 @@ public class PagedResponse<T>  : Response<T> where T : class
         TotalCount = totalCount;
     }
 
-    public PagedResponse(int currentPage, int pageSize, int totalCount, T? data, int code = Configuration.DefaultStatusCode, string message) : base(data, code, message)
+    public PagedResponse(int currentPage, int pageSize, int totalCount, T? data, int code = Configuration.DefaultStatusCode, string message = "") : base(data, code, message)
     {
         CurrentPage = currentPage;
         PageSize = pageSize;

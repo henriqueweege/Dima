@@ -2,7 +2,7 @@
 
 namespace Dima.Core.Responses;
 
-public class Response<T> where T : class
+public class Response<T> where T : class?
 {
     private readonly int _code;
 

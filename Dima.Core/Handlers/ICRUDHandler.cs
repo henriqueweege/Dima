@@ -1,13 +1,13 @@
-﻿using Dima.Core.Requests;
-using Dima.Core.Responses;
+﻿using Dima.Core.Responses;
 
 namespace Dima.Core.Handlers;
 
-public interface ICRUDHandler<Model, CreateRequest, UpdateRequest, DeleteRequest, GetAllRequest, GetByIdRequest> where Model : class
+public interface ICRUDHandler<TModel, in TCreateRequest, in TUpdateRequest, in TDeleteRequest, in TGetAllRequest,
+    in TGetByIdRequest> where TModel : class
 {
-    Task<Response<Model>> Create(CreateRequest request);
-    Task<Response<Model>> Update(UpdateRequest request);
-    Task<Response<Model>> Delete(DeleteRequest request);
-    Task<PagedResponse<IEnumerable<Model>>> GetAll(GetAllRequest request);
-    Task<Response<Model>> GetById(GetByIdRequest request);
+    Task<Response<TModel?>> Handle(TCreateRequest request);
+    Task<Response<TModel?>> Handle(TUpdateRequest request);
+    Task<Response<TModel?>> Handle(TDeleteRequest request);
+    Task<PagedResponse<IEnumerable<TModel?>>> Handle(TGetAllRequest request);
+    Task<Response<TModel>> Handle(TGetByIdRequest request);
 }

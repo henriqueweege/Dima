@@ -3,6 +3,7 @@ using Dima.Core.Handlers;
 using Dima.Core.Models;
 using Dima.Core.Requests.Categories;
 using Dima.Core.Responses;
+using Microsoft.EntityFrameworkCore;
 
 namespace Dima.Api.Handlers
 {
@@ -14,7 +15,8 @@ namespace Dima.Api.Handlers
             _context = context;
         }
 
-        public async Task<Response<Category>> Create(CreateCategory request)
+
+        public async Task<Response<Category?>> Handle(CreateCategory request)
         {
             try
             {
@@ -23,30 +25,87 @@ namespace Dima.Api.Handlers
                 _context.Categories.Add(category);
                 await _context.SaveChangesAsync();
 
-                return new Response<Category>(category);
+                return new Response<Category>(category, 200, "Categoria criada com sucesso.")!;
+
             }
-            catch (Exception ex) 
+            catch  
             {
-                throw;
+                return new Response<Category>(null, 500, "Não foi possível criar a categoria.")!;
             }
         }
 
-        public Task<Response<Category>> Delete(DeleteCategory request)
+        public async Task<Response<Category?>> Handle(UpdateCategory request)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var category = await _context.Categories.FirstOrDefaultAsync(x=> x.Id == request.Id && x.UserId == request.UserId);
+
+                if (category is null)
+                {
+                    return new Response<Category?>(null, 404, "Categoria para ser atualizada não foi encontrada.")!; 
+                }
+                
+                category.Title = request.Title;
+                category.Description = request.Description;
+                
+                _context.Categories.Update(category);
+                await _context.SaveChangesAsync();
+
+                return new Response<Category>(category, 200, "Categoria atualizada com sucesso.")!;
+
+            }
+            catch  
+            {
+                return new Response<Category>(null, 500, "Não foi possível atualizar a categoria.")!;
+            }
         }
 
-        public Task<PagedResponse<IEnumerable<Category>>> GetAll(GetAllCategory request)
+        public async Task<Response<Category?>> Handle(DeleteCategory request)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var category = await _context.Categories.FirstOrDefaultAsync(x=> x.Id == request.Id && x.UserId == request.UserId);
+
+                if (category is null)
+                {
+                    return new Response<Category?>(null, 404, "Categoria para ser excluída não foi encontrada.")!; 
+                }
+                
+                
+                _context.Categories.Remove(category);
+                await _context.SaveChangesAsync();
+
+                return new Response<Category>(category, 204, "Categoria excluída com sucesso.")!;
+            }
+            catch  
+            {
+                return new Response<Category>(null, 500, "Não foi possível atualizar a categoria.")!;
+            }
         }
 
-        public Task<Response<Category>> GetById(GetByIdCategory request)
+        public async Task<PagedResponse<IEnumerable<Category?>>> Handle(GetAllCategory request)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var query = _context.Categories.Where(x => x.UserId == request.UserId).OrderBy(x => x.Title);
+                
+                var res =  query.Skip((request.PageNumber - 1) * request.PageSize).Take(request.PageSize).ToListAsync();
+                
+                var count = query.CountAsync();
+                
+                var x = await Task.WhenAll(res, count);
+                _context.Categories.Remove(category);
+                await _context.SaveChangesAsync();
+
+                return new Response<Category>(category, 204, "Categoria excluída com sucesso.")!;
+            }
+            catch  
+            {
+                return new Response<Category>(null, 500, "Não foi possível atualizar a categoria.")!;
+            }
         }
 
-        public Task<Response<Category>> Update(UpdateCategory request)
+        public Task<Response<Category>> Handle(GetByIdCategory request)
         {
             throw new NotImplementedException();
         }
