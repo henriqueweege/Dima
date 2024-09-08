@@ -3,16 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dima.Core", "Dima.Core\Dima.Core.csproj", "{C54A717B-3DF1-462B-8013-8B85D8055BD1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dima.Core", "Dima.Core\Dima.Core.csproj", "{C54A717B-3DF1-462B-8013-8B85D8055BD1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dima.Api", "Dima.Api\Dima.Api.csproj", "{202D6012-2954-4E2D-A8A7-CFBC83DB4BED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dima.Api", "Dima.Api\Dima.Api.csproj", "{202D6012-2954-4E2D-A8A7-CFBC83DB4BED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dima.Web", "Dima.Web\Dima.Web.csproj", "{44026C67-68BA-4DFE-B3D3-E17D9948BD3B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dima.Web", "Dima.Web\Dima.Web.csproj", "{44026C67-68BA-4DFE-B3D3-E17D9948BD3B}"
 EndProject
 Global
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|x64 = Debug|x64
@@ -58,5 +55,8 @@ Global
 		{44026C67-68BA-4DFE-B3D3-E17D9948BD3B}.Release|x64.Build.0 = Release|Any CPU
 		{44026C67-68BA-4DFE-B3D3-E17D9948BD3B}.Release|x86.ActiveCfg = Release|Any CPU
 		{44026C67-68BA-4DFE-B3D3-E17D9948BD3B}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 EndGlobal
