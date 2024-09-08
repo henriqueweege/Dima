@@ -40,9 +40,9 @@ namespace Dima.Api.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Title = table.Column<string>(type: "NVARCHAR(80)", maxLength: 80, nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    PaidOrReceivedAt = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    PaidOrReceivedAt = table.Column<DateOnly>(type: "date", nullable: true),
                     Type = table.Column<short>(type: "SMALLINT", maxLength: 255, nullable: false),
-                    Amount = table.Column<decimal>(type: "DECIMAL", nullable: false),
+                    Amount = table.Column<decimal>(type: "DECIMAL(65,30)", nullable: false),
                     CategoryId = table.Column<long>(type: "bigint", nullable: false),
                     UserId = table.Column<string>(type: "VARCHAR(160)", maxLength: 160, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4")

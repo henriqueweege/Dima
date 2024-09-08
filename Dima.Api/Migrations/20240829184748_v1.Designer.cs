@@ -3,7 +3,6 @@ using System;
 using Dima.Api.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
@@ -12,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Dima.Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240824221110_v1")]
+    [Migration("20240829184748_v1")]
     partial class v1
     {
         /// <inheritdoc />
@@ -20,18 +19,14 @@ namespace Dima.Api.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.8")
+                .HasAnnotation("ProductVersion", "7.0.20")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
-
-            MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
 
             modelBuilder.Entity("Dima.Core.Models.Category", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<string>("Description")
                         .HasMaxLength(255)
@@ -58,10 +53,8 @@ namespace Dima.Api.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<long>("Id"));
-
                     b.Property<decimal>("Amount")
-                        .HasColumnType("MONEY");
+                        .HasColumnType("DECIMAL");
 
                     b.Property<long>("CategoryId")
                         .HasColumnType("bigint");
@@ -69,8 +62,8 @@ namespace Dima.Api.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<DateTime?>("PaidOrReceivedAt")
-                        .HasColumnType("datetime(6)");
+                    b.Property<DateOnly?>("PaidOrReceivedAt")
+                        .HasColumnType("date");
 
                     b.Property<string>("Title")
                         .IsRequired()

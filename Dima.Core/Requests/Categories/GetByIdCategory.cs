@@ -2,7 +2,6 @@
 
 namespace Dima.Core.Requests.Categories;
 
-public class GetByIdCategory : BaseRequest<Category>
+public class GetByIdCategory : BaseGetById<Category>
 {
-    public long Id { get; set; }
 }
