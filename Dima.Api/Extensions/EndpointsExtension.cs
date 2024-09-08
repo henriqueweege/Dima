@@ -1,8 +1,10 @@
 ﻿using Dima.Api.Common.Api;
 using Dima.Api.Endpoints.CategoryEndpoints;
+using Dima.Api.Endpoints.Identity;
 using Dima.Api.Endpoints.TransactionEndpoints;
+using Dima.Api.Models;
 
-namespace Dima.Api.Endpoints
+namespace Dima.Api.Extensions
 {
     public static class EndpointsExtension
     {
@@ -11,6 +13,7 @@ namespace Dima.Api.Endpoints
             var endpoints = app.MapGroup("");
 
             endpoints.MapGroup("v1/categories")
+                .RequireAuthorization()
                 .WithTags("Categories")
                 .MapEndpoint<CreateCategoryEndpoint>()
                 .MapEndpoint<UpdateCategoryEndpoint>()
@@ -19,12 +22,22 @@ namespace Dima.Api.Endpoints
                 .MapEndpoint<GetAllCategoryEndpoint>();
 
             endpoints.MapGroup("v1/transactions")
+                .RequireAuthorization()
                 .WithTags("Transactions")
                 .MapEndpoint<CreateTransactionEndpoint>()
                 .MapEndpoint<UpdateTransactionEndpoint>()
                 .MapEndpoint<DeleteTransactionEndpoint>()
                 .MapEndpoint<GetByIdTransactionEndpoint>()
                 .MapEndpoint<GetByRangeDateTransactionEndpoint>();
+
+            endpoints.MapGroup("v1/identity")
+                .WithTags("Identity")
+                .MapIdentityApi<User>();
+
+            endpoints.MapGroup("v1/identity")
+                .WithTags("Identity")
+                .MapEndpoint<LogoutEndpoint>()
+                .MapEndpoint<GetRolesEndpoint>();
 
         }
 
