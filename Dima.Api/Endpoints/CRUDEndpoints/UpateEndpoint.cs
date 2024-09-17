@@ -25,7 +25,7 @@ namespace Dima.Api.Endpoints.CRUDEndpoints
             .Produces<Response<TModel?>>();
 
 
-        private static async Task<IResult> HandleAsync([FromBody]TUpdateRequest request, [FromServices] ICRUDHandler<TModel, TCreateRequest, TUpdateRequest, TDeleteRequest, TGetAllRequest, TGetByIdRequest> handler,, ClaimsPrincipal user)
+        private static async Task<IResult> HandleAsync([FromBody]TUpdateRequest request, [FromServices] ICRUDHandler<TModel, TCreateRequest, TUpdateRequest, TDeleteRequest, TGetAllRequest, TGetByIdRequest> handler, ClaimsPrincipal user)
         {
             request.UserId = user.Identity!.Name!;
             var res = await handler.Handle(request);
