@@ -5,7 +5,8 @@ namespace Dima.Web
     public static class Configuration
     {
         public const string HttpClientName = "dima";
-        public const string BackendUrl = "http://localhost:5096";
+        public static string StripePublicKey { get; set; } = string.Empty;
+        public static string BackendUrl {get;set;} = "http://localhost:5096"; 
 
         public static MudTheme Theme = new()
         {
@@ -24,16 +25,17 @@ namespace Dima.Web
                 AppbarBackground = new MudBlazor.Utilities.MudColor("#1EFA2D"),
                 AppbarText = Colors.Shades.Black,
                 TextPrimary = Colors.Shades.Black,
-                PrimaryContrastText = Colors.Shades.Black,
-                DrawerText = Colors.Shades.Black,
-                DrawerBackground = Colors.LightGreen.Lighten4,
+                PrimaryContrastText = new MudBlazor.Utilities.MudColor("#000000"),
+                DrawerText = Colors.Shades.White,
+                DrawerBackground = Colors.Green.Darken4,
             },
             PaletteDark = new PaletteDark
             {
                 Primary = Colors.LightGreen.Accent3,
                 Secondary = Colors.LightGreen.Darken3,
                 AppbarBackground = Colors.LightGreen.Accent3,
-                AppbarText = Colors.Shades.Black
+                AppbarText = Colors.Shades.Black,
+                PrimaryContrastText = new MudBlazor.Utilities.MudColor("#000000")
             }
         };
     }

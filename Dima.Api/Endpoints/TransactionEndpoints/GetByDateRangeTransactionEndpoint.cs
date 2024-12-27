@@ -5,7 +5,7 @@ using Dima.Core.Requests.Transactions;
 namespace Dima.Api.Endpoints.TransactionEndpoints
 {
     public class GetByRangeDateTransactionEndpoint() 
-        : GetAllEndpoint<Transaction, CreateTransaction, UpdateTransaction, DeleteTransaction, GetByDateRangeTransaction, GetByIdTransaction>(EUrl.Category.ToString())
+        : GetAllEndpoint<Transaction, CreateTransaction, UpdateTransaction, DeleteTransaction, GetByDateRangeTransaction>(EUrl.Category.ToString())
     {
 
     }

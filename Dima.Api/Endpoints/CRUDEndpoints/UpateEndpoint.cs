@@ -8,8 +8,7 @@ using System.Security.Claims;
 
 namespace Dima.Api.Endpoints.CRUDEndpoints
 {
-    public class UpdateEndpoint<TModel, TCreateRequest, TUpdateRequest, TDeleteRequest, TGetAllRequest,
-     TGetByIdRequest> : IEndpoint where TModel : BaseModel where TUpdateRequest : BaseRequest<TModel>
+    public class UpdateEndpoint<TModel, TCreateRequest, TUpdateRequest, TDeleteRequest, TGetAllRequest> : IEndpoint where TModel : BaseModel where TUpdateRequest : BaseRequest<TModel>
     {
         private static string Url = string.Empty;
         public UpdateEndpoint(string url)
@@ -25,7 +24,7 @@ namespace Dima.Api.Endpoints.CRUDEndpoints
             .Produces<Response<TModel?>>();
 
 
-        private static async Task<IResult> HandleAsync([FromBody]TUpdateRequest request, [FromServices] ICRUDHandler<TModel, TCreateRequest, TUpdateRequest, TDeleteRequest, TGetAllRequest, TGetByIdRequest> handler, ClaimsPrincipal user)
+        private static async Task<IResult> HandleAsync([FromBody]TUpdateRequest request, [FromServices] ICRUDHandler<TModel, TCreateRequest, TUpdateRequest, TDeleteRequest, TGetAllRequest> handler, ClaimsPrincipal user)
         {
             request.UserId = user.Identity!.Name!;
             var res = await handler.Handle(request);

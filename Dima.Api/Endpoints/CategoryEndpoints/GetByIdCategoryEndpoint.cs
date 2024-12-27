@@ -6,7 +6,7 @@ using Dima.Core.Requests.Categories;
 
 namespace Dima.Api.Endpoints.CategoryEndpoints
 {
-    public class GetByIdCategoryEndpoint() : GetByIdEndpoint<Category, CreateCategory, UpdateCategory, DeleteCategory, GetAllCategory, GetByIdCategory>(EUrl.Category.ToString())
+    public class GetByIdCategoryEndpoint() : GetByIdEndpoint<Category, CreateCategory, UpdateCategory, DeleteCategory, GetAllCategory>(EUrl.Category.ToString())
     {
     }
 }

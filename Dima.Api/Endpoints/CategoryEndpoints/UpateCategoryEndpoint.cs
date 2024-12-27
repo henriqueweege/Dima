@@ -4,7 +4,7 @@ using Dima.Api.Endpoints.CRUDEndpoints;
 
 namespace Dima.Api.Endpoints.CategoryEndpoints
 {
-    public class UpdateCategoryEndpoint() : UpdateEndpoint<Category, CreateCategory, UpdateCategory, DeleteCategory, GetAllCategory, GetByIdCategory>(EUrl.Category.ToString())
+    public class UpdateCategoryEndpoint() : UpdateEndpoint<Category, CreateCategory, UpdateCategory, DeleteCategory, GetAllCategory>(EUrl.Category.ToString())
     {
     }
 }

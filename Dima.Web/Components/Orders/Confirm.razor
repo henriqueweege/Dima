@@ -1,0 +1,19 @@
+﻿@page "/pedidos/{number}/confirmar"
+
+@inherits ConfirmPage
+
+@if(Order is not null)
+{
+    @if(Order.Status == Core.Enums.EOrderStatus.Paid){
+        <h1> Pedido confirmado com sucesso!</h1>
+    }
+    else{
+        <h1>Ops, algo deu errado!</h1>
+    }
+}
+else{
+    <MudSkeleton Animation="Animation.Wave"></MudSkeleton>
+    <MudSkeleton Animation="Animation.Wave"></MudSkeleton>
+    <MudSkeleton Animation="Animation.Wave"></MudSkeleton>
+    <MudSkeleton Animation="Animation.Wave"></MudSkeleton>
+}

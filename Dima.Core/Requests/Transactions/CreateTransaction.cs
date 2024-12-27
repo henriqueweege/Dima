@@ -10,10 +10,10 @@ namespace Dima.Core.Requests.Transactions
         public string Title { get; set; } = default!;
 
         [Required(ErrorMessage = "PaidOrReceivedAt must be provided.")]
-        public DateOnly? PaidOrReceivedAt { get; set; }
-        
+        public DateTime? PaidOrReceivedAt { get; set; }
+
         [Required(ErrorMessage = "Type must be provided.")]
-        public ETransactionType Type { get; set; }
+        public ETransactionType Type { get; set; } = ETransactionType.Withdraw;
         
         [Required(ErrorMessage = "Amount must be provided.")]
         public decimal Amount { get; set; }

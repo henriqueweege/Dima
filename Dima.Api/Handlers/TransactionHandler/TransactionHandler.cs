@@ -1,5 +1,6 @@
 ﻿using Dima.Api.Data;
 using Dima.Core.Extensions;
+using Dima.Core.Handlers;
 using Dima.Core.Models;
 using Dima.Core.Requests;
 using Dima.Core.Requests.Transactions;
@@ -37,7 +38,7 @@ public class TransactionHandler : ITransactionHandler
     {
         try
         {
-            var getTransactionToUpdate = await Handle(new GetByIdTransaction() { Id = request.Id, UserId = request.UserId });
+            var getTransactionToUpdate = await Handle(request.Id, request.UserId);
 
             if (!getTransactionToUpdate.IsSuccess)
             {
@@ -48,7 +49,7 @@ public class TransactionHandler : ITransactionHandler
 
             toUpdate.Title = request.Title;
             toUpdate.CategoryId = request.CategoryId;
-            toUpdate.Amount = request.Amount;
+            toUpdate.Amount = Transaction.GetNormalizedAmount(request.Amount, request.Type);
             toUpdate.PaidOrReceivedAt = request.PaidOrReceivedAt;
             toUpdate.Type = request.Type;
 
@@ -70,7 +71,7 @@ public class TransactionHandler : ITransactionHandler
     {
         try
         {
-            var toRemove = await Handle(new GetByIdTransaction() { Id = request.Id, UserId = request.UserId });
+            var toRemove = await Handle(request.Id, request.UserId);
 
             if (!toRemove.IsSuccess)
             {
@@ -98,7 +99,7 @@ public class TransactionHandler : ITransactionHandler
             request.StartDate ??= DateTime.Now.GetStartDay();
             request.EndDate ??= DateTime.Now.GetEndDay();
 
-            var query = _context.Transactions.Where(x => x.UserId == request.UserId && x.CreatedAt >= request.StartDate && x.CreatedAt <= request.EndDate).OrderBy(x => x.Title);
+            var query = _context.Transactions.Where(x => x.UserId == request.UserId && x.PaidOrReceivedAt >= new DateOnly(request.StartDate.Value.Date.Year, request.StartDate.Value.Date.Month, request.StartDate.Value.Date.Day) && x.PaidOrReceivedAt <= new DateOnly(request.EndDate.Value.Date.Year, request.EndDate.Value.Date.Month, request.EndDate.Value.Date.Day)).OrderBy(x => x.Title);
 
             var res = await query.Skip((request.PageNumber - 1) * request.PageSize).Take(request.PageSize).ToListAsync();
 
@@ -114,11 +115,11 @@ public class TransactionHandler : ITransactionHandler
         }
     }
 
-    public async Task<Response<Transaction>> Handle(BaseGetById<Transaction> request)
+    public async Task<Response<Transaction>> Handle(long id, string userId)
     {
         try
         {
-            var transaction = await _context.Transactions.FirstOrDefaultAsync(x => x.Id == request.Id && x.UserId == request.UserId);
+            var transaction = await _context.Transactions.FirstOrDefaultAsync(x => x.Id == id && x.UserId == userId);
 
             if (transaction is null)
             {

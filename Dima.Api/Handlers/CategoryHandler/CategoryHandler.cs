@@ -1,4 +1,5 @@
 ﻿using Dima.Api.Data;
+using Dima.Core.Handlers;
 using Dima.Core.Models;
 using Dima.Core.Requests;
 using Dima.Core.Requests.Categories;
@@ -103,12 +104,12 @@ public class CategoryHandler : ICategoryHandler
         }
     }
 
-    public async Task<Response<Category>> Handle(BaseGetById<Category> request)
+    public async Task<Response<Category>> Handle(long id, string userId)
     {
         try
         {
 
-            var category = await _context.Categories.FirstOrDefaultAsync(x => x.Id == request.Id && x.UserId == request.UserId);
+            var category = await _context.Categories.FirstOrDefaultAsync(x => x.Id == id && x.UserId == userId);
 
             if (category is null)
             {

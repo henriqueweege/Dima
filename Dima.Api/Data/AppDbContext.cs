@@ -1,5 +1,6 @@
 ﻿using Dima.Api.Models;
 using Dima.Core.Models;
+using Dima.Core.Models.Reports;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -21,10 +22,22 @@ public class AppDbContext(DbContextOptions<AppDbContext> opts) : IdentityDbConte
 
     public DbSet<Category> Categories { get; set; } = default!;
     public DbSet<Transaction> Transactions { get; set; } = default!;
+    public DbSet<IncomesAndExpenses> IncomesAndExpenses { get; set; } = null!;
+    public DbSet<ExpensesByCategory> ExpensesByCategories { get; set; } = null!;
+    public DbSet<FinancialSummary> FinancialSummaries { get; set; } = null!;
+    public DbSet<IncomesByCategory> IncomesByCategories { get; set; } = null!;
+    public DbSet<Product> Products { get; set; } = null!;
+    public DbSet<Order> Orders { get; set; } = null!;
+    public DbSet<Voucher> Vouchers { get; set; } = null!;
+
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+
+        modelBuilder.Entity<IncomesAndExpenses>().HasNoKey().ToView("vwGetIncomesAndExpenses");
+        modelBuilder.Entity<IncomesByCategory>().HasNoKey().ToView("vwGetIncomesByCategory");
+        modelBuilder.Entity<ExpensesByCategory>().HasNoKey().ToView("vwGetExpensesByCategory");
     }
 }

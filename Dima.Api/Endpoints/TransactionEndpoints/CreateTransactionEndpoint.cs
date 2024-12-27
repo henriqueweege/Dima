@@ -8,7 +8,7 @@ using Dima.Core.Requests.Transactions;
 namespace Dima.Api.Endpoints.TransactionEndpoints
 {
     public class CreateTransactionEndpoint() 
-        : CreateEndpoint<Transaction, CreateTransaction, UpdateTransaction, DeleteTransaction, GetByDateRangeTransaction, GetByIdTransaction>(EUrl.Transaction.ToString())
+        : CreateEndpoint<Transaction, CreateTransaction, UpdateTransaction, DeleteTransaction, GetByDateRangeTransaction>(EUrl.Transaction.ToString())
     {
     }
 }

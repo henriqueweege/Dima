@@ -18,6 +18,8 @@ public class Transaction : BaseModel
     public string UserId { get; set; } = default!;
 
     public static Transaction Create(CreateTransaction request)
-        => new Transaction { Title = request.Title, PaidOrReceivedAt = request.PaidOrReceivedAt, Type = request.Type, Amount = request.Amount, CategoryId = request.CategoryId, UserId = request.UserId };
+        => new Transaction { Title = request.Title, PaidOrReceivedAt = new DateOnly(request.PaidOrReceivedAt.Value.Date.Year, request.PaidOrReceivedAt.Value.Date.Month, request.PaidOrReceivedAt.Value.Date.Day), Type = request.Type, Amount = GetNormalizedAmount(request.Amount, request.Type), CategoryId = request.CategoryId, UserId = request.UserId };
+
+    public static decimal GetNormalizedAmount(decimal amount, ETransactionType type) => (type == ETransactionType.Deposit || amount == decimal.Zero) ? Math.Abs(amount) : Math.Abs(amount) * -1;
 }
 

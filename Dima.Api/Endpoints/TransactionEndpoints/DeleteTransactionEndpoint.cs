@@ -5,7 +5,7 @@ using Dima.Core.Requests.Transactions;
 namespace Dima.Api.Endpoints.TransactionEndpoints;
 
 public class DeleteTransactionEndpoint() 
-    : DeleteEndpoint<Transaction, CreateTransaction, UpdateTransaction, DeleteTransaction, GetByDateRangeTransaction, GetByIdTransaction>(EUrl.Transaction.ToString())
+    : DeleteEndpoint<Transaction, CreateTransaction, UpdateTransaction, DeleteTransaction, GetByDateRangeTransaction>(EUrl.Transaction.ToString())
 {
     
 }

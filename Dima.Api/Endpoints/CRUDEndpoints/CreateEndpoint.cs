@@ -8,8 +8,7 @@ using Dima.Core.Requests;
 
 namespace Dima.Api.Endpoints.CRUDEndpoints;
 
-public abstract class CreateEndpoint<TModel,  TCreateRequest,  TUpdateRequest,  TDeleteRequest,  TGetAllRequest,
-     TGetByIdRequest> : IEndpoint where TModel : BaseModel where TCreateRequest : BaseRequest<TModel>
+public abstract class CreateEndpoint<TModel,  TCreateRequest,  TUpdateRequest,  TDeleteRequest,  TGetAllRequest> : IEndpoint where TModel : BaseModel where TCreateRequest : BaseRequest<TModel>
 {
     private static string Url = string.Empty;
     public CreateEndpoint(string url)
@@ -24,7 +23,7 @@ public abstract class CreateEndpoint<TModel,  TCreateRequest,  TUpdateRequest,  
             .WithDescription($"Create {typeof(TModel).Name}.")
             .Produces<Response<TModel?>>();
 
-    private static async Task<IResult> HandleAsync(ClaimsPrincipal user, TCreateRequest request, [FromServices] ICRUDHandler<TModel, TCreateRequest, TUpdateRequest, TDeleteRequest, TGetAllRequest, TGetByIdRequest> handler)
+    private static async Task<IResult> HandleAsync(ClaimsPrincipal user, TCreateRequest request, [FromServices] ICRUDHandler<TModel, TCreateRequest, TUpdateRequest, TDeleteRequest, TGetAllRequest> handler)
     {
         request.UserId = user.Identity!.Name!;
 

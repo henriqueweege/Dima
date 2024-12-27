@@ -8,8 +8,7 @@ using System.Security.Claims;
 
 namespace Dima.Api.Endpoints.CRUDEndpoints
 {
-    public class DeleteEndpoint<TModel, TCreateRequest, TUpdateRequest, TDeleteRequest, TGetAllRequest,
-     TGetByIdRequest> : IEndpoint where TModel : BaseModel where TDeleteRequest : BaseRequest<TModel>
+    public class DeleteEndpoint<TModel, TCreateRequest, TUpdateRequest, TDeleteRequest, TGetAllRequest> : IEndpoint where TModel : BaseModel where TDeleteRequest : BaseRequest<TModel>
     {
         private static string Url = string.Empty;
         public DeleteEndpoint(string url)
@@ -24,7 +23,7 @@ namespace Dima.Api.Endpoints.CRUDEndpoints
             .WithDescription($"Delete {typeof(TModel).Name}.")
             .Produces<Response<TModel?>>();
 
-        private static async Task<IResult> HandleAsync([FromBody]TDeleteRequest request, [FromServices] ICRUDHandler<TModel, TCreateRequest, TUpdateRequest, TDeleteRequest, TGetAllRequest, TGetByIdRequest> handler, ClaimsPrincipal user)
+        private static async Task<IResult> HandleAsync([FromBody]TDeleteRequest request, [FromServices] ICRUDHandler<TModel, TCreateRequest, TUpdateRequest, TDeleteRequest, TGetAllRequest> handler, ClaimsPrincipal user)
         {
             request.UserId = user.Identity!.Name!;
             var res = await handler.Handle(request);

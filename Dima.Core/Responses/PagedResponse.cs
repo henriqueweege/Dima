@@ -18,6 +18,7 @@ public class PagedResponse<T>  : Response<T> where T : class
         PageSize = pageSize;
         TotalCount = totalCount;
     }
+    public PagedResponse(T? data, int code = Configuration.DefaultStatusCode, string? message = null) : base(data, code, message) { }
 
     public int CurrentPage { get; set; }
     public int TotalPage  => (int)Math.Ceiling(TotalCount / (double)PageSize);

@@ -22,5 +22,20 @@ namespace Dima.Core.Requests.Transactions
 
         [Required(ErrorMessage = "CategoryId must be provided.")]
         public long CategoryId { get; set; }
+
+        public static UpdateTransaction Create(Transaction transaction)
+        {
+            var res = new UpdateTransaction();
+
+            res.Id = transaction.Id;
+            res.Title = transaction.Title;
+            res.PaidOrReceivedAt = transaction.PaidOrReceivedAt;
+            res.Type = transaction.Type;
+            res.Amount = transaction.Amount;
+            res.CategoryId = transaction.CategoryId;
+
+            return res;
+        }
+
     }
 }

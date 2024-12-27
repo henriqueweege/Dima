@@ -18,7 +18,7 @@ namespace Dima.Web.Handlers
                    : new Response<string>(null, (int)result.StatusCode, "Não foi possível realizar o login.");
         }
 
-        public async Task Logout()
+        public async Task LogoutAsync()
         {
             var emptyContent = new StringContent("{}", Encoding.UTF8, "application/json");
             await _client.PostAsJsonAsync("v1/identity/logout", emptyContent);
@@ -26,7 +26,7 @@ namespace Dima.Web.Handlers
 
         public async Task<Response<string>> RegisterAsync(RegisterRequest request)
         {
-            var result = await _client.PostAsJsonAsync("v1/register", request);
+            var result = await _client.PostAsJsonAsync("v1/identity/register", request);
             return result.IsSuccessStatusCode
                    ? new Response<string>("Cadastro realizado com sucesso!", (int)result.StatusCode, "Cadastro realizado com sucesso!")
                    : new Response<string>(null, (int)result.StatusCode, "Não foi possível realizar o login.");

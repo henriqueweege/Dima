@@ -1,0 +1,14 @@
+﻿@using Dima.Core.Enums
+@inherits OrderActionComponent
+
+@switch(Order.Status){
+    case EOrderStatus.Paid:
+        <MudButton OnClick="OnRefundButtonClicked" FullWidth="true" Color="Color.Warning" Variant="Variant.Outlined"> Solicitar Estorno</MudButton>
+        break;
+    case EOrderStatus.WaitingPayment:
+        <MudButton OnClick="OnPayButtonClicked" FullWidth="true" Color="Color.Success" Variant="Variant.Filled" Size="Size.Large" Class="mb-4">Pagar com Stripe</MudButton>
+        <MudButton OnClick="OnCancelButtonClicked" FullWidth="true" Color="Color.Error" Variant="Variant.Outlined">Cancelar Pedido</MudButton>
+        break;
+    default:
+        break;
+}
